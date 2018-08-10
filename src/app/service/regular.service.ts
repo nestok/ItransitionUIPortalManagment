@@ -10,5 +10,7 @@ export class RegularService {
   public countryPattern = '^[a-zA-Z_-]*';
   public cityPattern = '^[a-zA-Z_-]*';
   public bioPattern = '^[a-zA-Z0-9_-]{0,1000}$';
-  constructor() {}
+
+  constructor() {
+  }
 }

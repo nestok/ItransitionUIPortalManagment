@@ -1,12 +1,13 @@
-.no-space{
-    margin: 0px;
-}
-.fa-search{
-    margin-right: 10px;
-    margin-top: 5px;
+.no-space {
+  margin: 0px;
 }
 
-.rigth-pos{
+.fa-search {
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.rigth-pos {
   position: absolute;
   right: 0;
 }
