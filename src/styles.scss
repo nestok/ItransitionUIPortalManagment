@@ -1,0 +1,31 @@
+@import '../node_modules/bootstrap/scss/functions';
+@import "~ngx-toastr/toastr.css";
+
+.container {
+  margin-top: 5px;
+  min-height:100%;
+  width: 80%;
+  position:relative;
+}
+
+html { height:100%; }
+body {  height:100%; }
+
+.theme-newspaper {
+  height: 100%;
+}
+
+.themed {
+  position:relative; min-height: 100%;
+}
+
+.center-container {
+  margin: 0 auto;
+}
+
+footer {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height: 60px;
+}

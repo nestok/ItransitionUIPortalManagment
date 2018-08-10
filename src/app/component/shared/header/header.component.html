@@ -1,0 +1,28 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+  <h2>
+    <a href="#" class="navbar-brand">Navbar</a>
+  </h2>
+  <links>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/users']">Users</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav nav-flex-icons rigth-pos" *ngIf="!isLogin()">
+      <li class="nav-item waves-light" mdbWavesEffect>
+        <a class="nav-link" routerLink="/login" translate>Login</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav rigth-pos" *ngIf="isLogin()">
+      <li class="nav-item waves-light" mdbWavesEffect>
+        <a class="nav-link" routerLink="/"></a>
+      </li>
+      <li class="nav-item waves-light" mdbWavesEffect>
+        <a class="nav-link" routerLink="/login" translate>Logout</a>
+      </li>
+    </ul>
+  </links>
+</mdb-navbar>
