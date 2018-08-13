@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 
 @Injectable()
-export class InfoCodesService {
+export class InfocodesService {
   constructor() {
   }
 

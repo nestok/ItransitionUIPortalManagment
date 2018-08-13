@@ -3,9 +3,10 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {UserService, RegularService} from '../../../service/index';
-import {InfoCodesService} from '../../../service/infoCodes.service';
+import {InfocodesService} from '../../../service/infocodes.service';
 import {InfoService} from '../../../service/info.service';
 import {Subscription} from 'rxjs';
+import {ErrorDto} from '../../../dto/ErrorDto';
 
 @Component({templateUrl: 'register.component.html'})
 export class RegisterComponent implements OnInit, OnDestroy {
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private router: Router,
     private userService: UserService,
     private regularService: RegularService,
-    private infoCodesService: InfoCodesService,
+    private infoCodesService: InfocodesService,
     private infoService: InfoService) {
   }
 
@@ -44,10 +45,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.submitSubscription = this.userService.register(this.registerForm.value)
       .pipe(first())
       .subscribe(
-        (bla) => {
-          this.infoService.alertInformation(this.infoCodesService.SUCCESS, this.infoCodesService.SUCCESS_REGISTRATION);
-          this.loading = false;
-          this.router.navigate(['/login']);
+        (error: ErrorDto) => {
+          if (error !== undefined){
+            this.infoService.alertInformation(this.infoCodesService.ERROR, error.message);
+            this.loading = false;
+          } else {
+            this.infoService.alertInformation(this.infoCodesService.SUCCESS, 'Successful registration');
+            this.loading = false;
+            this.router.navigate(['/login']);
+          }
         },
         errorResponse => {
           this.infoService.alertInformation(this.infoCodesService.ERROR, errorResponse.error.message);

@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'auth/activate/:code', component: LoginComponent},
-  {path: 'users', component: UserListComponent},
+  {path: 'users', component: UserListComponent, canActivate: [AdminGuard]},
   {path: '**', redirectTo: 'exception404'}
 ];
 

@@ -24,4 +24,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   }
 
+  isAdmin(): boolean {
+    return this.authenticationService.isAdmin();
+  }
+
 }

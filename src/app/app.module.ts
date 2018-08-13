@@ -17,7 +17,7 @@ import {HomeComponent} from './component/home/home.component';
 import {UserListComponent} from './component/user/user-list/user-list.component';
 import {RegularService} from './service/regular.service';
 import {RegisterComponent} from './component/auth/register/register.component';
-import {InfoCodesService} from './service/infoCodes.service';
+import {InfocodesService} from './service/infocodes.service';
 import {InfoService} from './service/info.service';
 import {ToastrModule} from 'ngx-toastr';
 
@@ -48,7 +48,7 @@ import {ToastrModule} from 'ngx-toastr';
     AdminGuard,
     AuthenticationService,
     RegularService,
-    InfoCodesService,
+    InfocodesService,
     InfoService,
     UserService,
     {
