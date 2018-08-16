@@ -1,3 +1,48 @@
 ﻿<section class="py-4 text-center text-lg-left">
-  <h2>HALLO</h2>
+  <div class="row">
+    <div class="col-md-4 mt-1">
+      <h2>Team Kotlin</h2>
+      <table class="table table-hover mt-4">
+        <thead>
+        <tr>
+          <!--<th></th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let contributor of contributors">
+          <td class="cursor-pointer">{{contributor.lastName + " " + contributor.firstName}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-8">
+      <div class="row mb-1">
+        <div class="my-auto">
+          <h3>Reply statuses</h3>
+        </div>
+        <div>
+          <button type="button" class="ml-3 btn btn-primary btn-round" routerLink="/add-reply" >Add reply</button>
+        </div>
+      </div>
+      <div class="m-y-rl-15">
+          <div class="card card-cascade narrower">
+            <div *ngFor="let reply of replies" class="tab-slider--body">
+              <a class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Vasya Pypkin</h5>
+                  <div>
+                    <h5 class="float-left mr-1">Status: {{reply.mood.text}}</h5>
+                    <i class="material-icons">{{reply.mood.icon}}</i>
+                  </div>
+                  <small>Published: {{reply.publish_date}}</small>
+                </div>
+                <p class="mb-1">Location: {{reply.location.name}}</p>
+                <small>{{reply.comment}}</small>
+              </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

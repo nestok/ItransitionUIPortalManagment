@@ -6,6 +6,8 @@ import {AuthenticationService} from '../../../service/index';
 import {RegularService} from '../../../service/regular.service';
 import {LoginRequestDto} from '../../../dto/LoginRequestDto';
 import {Subscription} from 'rxjs';
+import {InfocodesService} from '../../../service/infocodes.service';
+import {InfoService} from '../../../service/info.service';
 
 @Component({templateUrl: 'login.component.html'})
 export class LoginComponent implements OnInit, OnDestroy {
@@ -18,6 +20,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private infoService: InfoService,
+    private infoCodesService: InfocodesService,
     private regularService: RegularService,
     private authenticationService: AuthenticationService) {
   }
@@ -39,10 +43,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (!this.loginForm.invalid) {
       this.loading = true;
       this.submitSubscription = this.authenticationService.login(new LoginRequestDto(this.formControl.username.value, this.formControl.password.value))
-        .pipe(first())
         .subscribe(() => {
-          this.loading = false;
-        });
+            this.loading = false;
+          },
+          (errorResponse) => {
+            this.infoService.alertInformation(this.infoCodesService.ERROR, errorResponse.error);
+            this.loading = false;
+          }
+        );
     }
   }
 

@@ -3,6 +3,22 @@
     <h2 class="mb-4">Registration</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
+        <label for="firstName" translate>First Name</label>
+        <input type="text" id="firstName" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControl.firstName.errors }" />
+        <div *ngIf="submitted && formControl.firstName.errors" class="invalid-feedback">
+          <div *ngIf="formControl.firstName.errors.required" translate>First Name is required</div>
+          <div *ngIf="formControl.firstName.errors.pattern" translate>First Name is invalid</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="lastName" translate>Last Name</label>
+        <input type="text" id="lastName" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && formControl.lastName.errors }" />
+        <div *ngIf="submitted && formControl.lastName.errors" class="invalid-feedback">
+          <div *ngIf="formControl.lastName.errors.required" translate>Last Name is required</div>
+          <div *ngIf="formControl.lastName.errors.pattern" translate>Last Name is invalid</div>
+        </div>
+      </div>
+      <div class="form-group">
         <label for="username" translate>Username</label>
         <input type="text" id="username" formControlName="username" class="form-control"
                [ngClass]="{ 'is-invalid': submitted && formControl.username.errors }"/>

@@ -26,6 +26,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
+      firstName: ['', [Validators.required, Validators.pattern(this.regularService.firstNamePattern)]],
+      lastName: ['', [Validators.required, Validators.pattern(this.regularService.lastNamePattern)]],
       username: ['', [Validators.required, Validators.pattern(this.regularService.usernamePattern)]],
       password: ['', [Validators.required, Validators.pattern(this.regularService.passwordPattern)]],
       email: ['', [Validators.required, Validators.pattern(this.regularService.emailPattern)]]
@@ -43,20 +45,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
     this.loading = true;
     this.submitSubscription = this.userService.register(this.registerForm.value)
-      .pipe(first())
       .subscribe(
-        (error: ErrorDto) => {
-          if (error !== undefined){
-            this.infoService.alertInformation(this.infoCodesService.ERROR, error.message);
-            this.loading = false;
-          } else {
-            this.infoService.alertInformation(this.infoCodesService.SUCCESS, 'Successful registration');
-            this.loading = false;
-            this.router.navigate(['/login']);
-          }
+        () => {
+          this.infoService.alertInformation(this.infoCodesService.SUCCESS, 'Successful registration');
+          this.loading = false;
+          this.router.navigate(['/login']);
         },
-        errorResponse => {
-          this.infoService.alertInformation(this.infoCodesService.ERROR, errorResponse.error.message);
+        (errorResponse) => {
+          this.infoService.alertInformation(this.infoCodesService.ERROR, errorResponse.error);
           this.loading = false;
         });
   }

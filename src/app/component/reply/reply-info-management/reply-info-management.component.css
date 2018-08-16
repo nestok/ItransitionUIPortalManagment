@@ -1,0 +1,66 @@
+/*#selected-icon-container {*/
+  /*display: inline-block;*/
+/*}*/
+
+#selected-icon-container i {
+  font-size: 32px;
+  margin: 5px;
+  background: #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+#icon-container i {
+  font-size: 32px;
+  margin: 5px;
+  background: #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+#selected-icon-container:hover i {
+  background: #af0;
+}
+#selected-icon-container:hover + #icons {
+  display: flex;
+}
+#icons {
+  background: #f1f1f1;
+  width: 375px;
+  height: 200px;
+  overflow: auto;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  display: none;
+  justify-content: flex-start;
+  position: absolute;
+  flex-wrap: wrap;
+}
+#icons:hover {
+  display: flex;
+}
+#icons i {
+  margin: 5px;
+  background: #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+  display: block;
+}
+#icons i:hover {
+  background: #af0;
+}
+
+.no-margin {
+  margin-left: 0px;
+}
+
+.pt-30px {
+  padding-top: 30px;
+}

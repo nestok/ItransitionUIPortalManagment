@@ -20,6 +20,9 @@ import {RegisterComponent} from './component/auth/register/register.component';
 import {InfocodesService} from './service/infocodes.service';
 import {InfoService} from './service/info.service';
 import {ToastrModule} from 'ngx-toastr';
+import {ReplyService} from './service/reply.service';
+import { ReplyAddComponent } from './component/reply/reply-add/reply-add.component';
+import { ReplyInfoManagementComponent } from './component/reply/reply-info-management/reply-info-management.component';
 
 
 @NgModule({
@@ -41,7 +44,9 @@ import {ToastrModule} from 'ngx-toastr';
     LoginComponent,
     HeaderComponent,
     UserListComponent,
-    RegisterComponent
+    RegisterComponent,
+    ReplyAddComponent,
+    ReplyInfoManagementComponent
   ],
   schemas: [],
   providers: [
@@ -50,6 +55,7 @@ import {ToastrModule} from 'ngx-toastr';
     RegularService,
     InfocodesService,
     InfoService,
+    ReplyService,
     UserService,
     {
       provide: HTTP_INTERCEPTORS,

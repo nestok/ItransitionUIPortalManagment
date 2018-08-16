@@ -1,8 +1,21 @@
 ﻿/*.img-size{*/
-  /*max-width: 250px;*/
-  /*max-height: 250px;*/
+/*max-width: 250px;*/
+/*max-height: 250px;*/
 /*}*/
 
-.pointer{
+.pointer {
   cursor: pointer;
+}
+
+.btn-round {
+  border-radius: 15px;
+}
+
+.m-top-20 {
+  margin-top: 20px;
+}
+
+.m-y-rl-15 {
+  margin-right: -15px;
+  margin-left: -15px;
 }

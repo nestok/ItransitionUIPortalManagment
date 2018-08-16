@@ -17,6 +17,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   users: UserListDto[] = [];
   idDelete: number;
   getUsersSubscription: Subscription;
+  deleteUserSubscription: Subscription;
 
   constructor(
     private userService: UserService,
@@ -29,7 +30,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   loadAllUsers() {
-    this.getUsersSubscription = this.userService.getAll().pipe(first()).subscribe((userList: UserListDto[]) => {
+    this.getUsersSubscription = this.userService.getAll().subscribe((userList: UserListDto[]) => {
         this.users = userList;
       },
       () => {
@@ -38,8 +39,8 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   deleteUser(userId: number) {
-    this.userService.delete(userId).pipe(first())
-    .subscribe((kek) => {
+    this.deleteUserSubscription = this.userService.delete(userId)
+    .subscribe(() => {
       this.loadAllUsers();
     }, (error) => {
         console.log(error);
@@ -48,6 +49,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.getUsersSubscription && this.getUsersSubscription.unsubscribe();
+    this.deleteUserSubscription && this.deleteUserSubscription.unsubscribe();
   }
 
 }

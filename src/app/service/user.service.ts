@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {User} from '../model';
 import {UserListDto} from '../dto/UserListDto';
+import {UserAddDto} from '../dto/UserAddDto';
+import {ContributorsListDto} from '../dto/ContributorsListDto';
 
 @Injectable()
 export class UserService {
@@ -14,7 +16,11 @@ export class UserService {
     return this.http.get<UserListDto[]>(`${environment.userServerUrl}user/loadAll`);
   }
 
-  register(user: User) {
+  getAllContributors() {
+    return this.http.get<ContributorsListDto[]>(`${environment.userServerUrl}user/loadAllContributors`);
+  }
+
+  register(user: UserAddDto) {
     return this.http.post(`${environment.userServerUrl}user/register`, user);
   }
 
