@@ -19,3 +19,12 @@
   margin-right: -15px;
   margin-left: -15px;
 }
+
+.right-pos {
+  float: right;
+  right: 0;
+}
+
+.pb-50px {
+  padding-bottom: 50px;
+}

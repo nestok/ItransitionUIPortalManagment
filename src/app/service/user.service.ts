@@ -28,4 +28,10 @@ export class UserService {
     return this.http.delete(`${environment.userServerUrl}user/delete/` + id);
   }
 
+  transformRoleToView(role: string): string {
+    let updatedRole = role.substring(5).toLocaleLowerCase();
+    updatedRole = updatedRole.charAt(0).toUpperCase() + updatedRole.slice(1);
+    return updatedRole;
+  }
+
 }

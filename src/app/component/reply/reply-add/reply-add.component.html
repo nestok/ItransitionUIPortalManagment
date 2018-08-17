@@ -19,9 +19,13 @@
           <option *ngFor="let location of locations" [ngValue]="location">{{location.name}}</option>
         </select>
       </div>
-      <div class="md-form form-group">
-        <textarea type="text" id="comment" class="md-textarea form-control" formControlName="comment" mdbInputDirective></textarea>
-        <label for="comment">Comment</label>
+      <!--<div class="md-form form-group">-->
+        <!--<textarea type="text" id="comment" class="md-textarea form-control" formControlName="comment" mdbInputDirective></textarea>-->
+        <!--<label for="comment">Comment</label>-->
+      <!--</div>-->
+      <div class="form-group">
+        <label class="mb-1" for="areaComment">Comment</label>
+        <textarea type="text" id="areaComment" formControlName="comment" class="form-control h-150px"></textarea>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary" (click)="addReply()">Add reply</button>

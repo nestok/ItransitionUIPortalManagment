@@ -5,11 +5,12 @@ import {ReplyService} from '../../../service/reply.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {InfocodesService} from '../../../service/infocodes.service';
 import {Subscription} from 'rxjs';
-import {UserListDto} from '../../../dto/UserListDto';
 import {ContributorsListDto} from '../../../dto/ContributorsListDto';
-import {UserService} from '../../../service';
+import {AuthenticationService, UserService} from '../../../service';
 import {Router} from '@angular/router';
 import {ReplyAddDto} from '../../../dto/ReplyAddDto';
+import * as SockJS from 'sockjs-client';
+import * as Stomp from '@stomp/stompjs';
 
 @Component({
   selector: 'app-reply-add',
@@ -18,6 +19,8 @@ import {ReplyAddDto} from '../../../dto/ReplyAddDto';
 })
 export class ReplyAddComponent implements OnInit, OnDestroy {
 
+  private serverUrl = 'http://localhost:8081/socket';
+  private stompClient;
   getMoodsSubscription: Subscription;
   getContributorsSubscription: Subscription;
   getLocationsSubscription: Subscription;
@@ -26,6 +29,7 @@ export class ReplyAddComponent implements OnInit, OnDestroy {
   locations: Location[];
   replyForm: FormGroup;
   contributors: ContributorsListDto[];
+
 
   constructor(
     private infoService: InfoService,
@@ -46,6 +50,17 @@ export class ReplyAddComponent implements OnInit, OnDestroy {
     this.loadMoodList();
     this.loadAllContributors();
     this.loadLocationList();
+    this.initializeWebSocket();
+  }
+
+  initializeWebSocket() {
+    const ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+    this.stompClient.connect({}, null);
+  }
+
+  sendMessage() {
+    this.stompClient.send('/app/send/reply' , {});
   }
 
   loadMoodList() {
@@ -85,6 +100,7 @@ export class ReplyAddComponent implements OnInit, OnDestroy {
     const reply = this.formReplyModel();
     this.addReplySubscription = this.replyService.addReply(reply)
       .subscribe(() => {
+          this.sendMessage();
           this.router.navigate([`/`]);
         },
         (errorResponse) => {
@@ -103,6 +119,9 @@ export class ReplyAddComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.stompClient !== null) {
+      this.stompClient.disconnect();
+    }
     this.getContributorsSubscription && this.getContributorsSubscription.unsubscribe();
     this.getMoodsSubscription && this.getMoodsSubscription.unsubscribe();
   }

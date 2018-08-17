@@ -6,6 +6,7 @@ import {InfocodesService} from '../../../service/infocodes.service';
 import {Mood, Location} from '../../../model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ModalDirective} from 'angular-bootstrap-md';
+import {ConfirmationDialogService} from '../../shared/delete-confirmation-dialog/confirmation-dialog.service';
 
 @Component({
   selector: 'app-reply-info-management',
@@ -33,7 +34,8 @@ export class ReplyInfoManagementComponent implements OnInit, OnDestroy, AfterVie
     private infoService: InfoService,
     private replyService: ReplyService,
     private formBuilder: FormBuilder,
-    private infoCodesService: InfocodesService) {
+    private infoCodesService: InfocodesService,
+    private confirmationDialogService: ConfirmationDialogService) {
     this.moodForm = this.formBuilder.group({
       moodText: ['calm'],
       moodIcon: ['accessibility']
@@ -173,6 +175,20 @@ export class ReplyInfoManagementComponent implements OnInit, OnDestroy, AfterVie
   setEditLocationFormValues(location: Location) {
     this.locationNameControl.setValue(location.name);
     this.editLocationId = location.id;
+  }
+
+  openDeleteMoodConfirmationDialog() {
+    this.confirmationDialogService.confirm('Do you really want to delete this mood?')
+      .then(
+        () => this.deleteMood(this.deleteMoodId))
+      .catch(() => null);
+  }
+
+  openDeleteLocationConfirmationDialog() {
+    this.confirmationDialogService.confirm('Do you really want to delete this location?')
+      .then(
+        () => this.deleteLocation(this.deleteLocationId))
+      .catch(() => null);
   }
 
   deleteMood(moodId: number) {

@@ -28,7 +28,7 @@
       <div class="m-y-rl-15">
           <div class="card card-cascade narrower">
             <div *ngFor="let reply of replies" class="tab-slider--body">
-              <a class="list-group-item list-group-item-action flex-column align-items-start">
+              <a class="list-group-item list-group-item-action flex-column align-items-start" [ngClass]="isAdmin() ? 'pb-50px' : ''">
                 <div class="d-flex w-100 justify-content-between">
                   <h5 class="mb-1">Vasya Pypkin</h5>
                   <div>
@@ -38,7 +38,12 @@
                   <small>Published: {{reply.publish_date}}</small>
                 </div>
                 <p class="mb-1">Location: {{reply.location.name}}</p>
-                <small>{{reply.comment}}</small>
+                <div>
+                  <small>{{reply.comment}}</small>
+                </div>
+                <div *ngIf="isAdmin()" class="right-pos">
+                  <button type="button" class="ml-3 mb-0 btn btn-danger btn-round btn-sm" (click)="deleteReplyId = reply.id; openDeleteConfirmationDialog()" >Delete reply</button>
+                </div>
               </a>
             </div>
         </div>

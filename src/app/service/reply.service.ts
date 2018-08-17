@@ -51,4 +51,8 @@ export class ReplyService {
     return this.http.delete(`${environment.resourceServerUrl}reply/deleteLocation/` + id);
   }
 
+  deleteReply(id: number) {
+    return this.http.delete(`${environment.resourceServerUrl}reply/deleteReply/` + id);
+  }
+
 }

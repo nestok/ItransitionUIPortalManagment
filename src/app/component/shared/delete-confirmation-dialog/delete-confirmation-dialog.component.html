@@ -1,0 +1,19 @@
+<div class="m-0 modal-dialog modal-notify modal-danger" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <p class="heading lead">Delete confirm</p>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()" >
+        <span aria-hidden="true" class="white-text">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="text-center">
+        <p>{{message}}</p>
+      </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+      <a type="button" class="btn btn-primary waves-light" mdbWavesEffect (click)="accept()">Yes</a>
+      <a type="button" class="btn btn-outline-secondary" data-dismiss="modal" (click)="close()" mdbWavesEffect>No</a>
+    </div>
+  </div>
+</div>

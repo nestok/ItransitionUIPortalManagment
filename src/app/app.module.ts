@@ -23,15 +23,16 @@ import {ToastrModule} from 'ngx-toastr';
 import {ReplyService} from './service/reply.service';
 import { ReplyAddComponent } from './component/reply/reply-add/reply-add.component';
 import { ReplyInfoManagementComponent } from './component/reply/reply-info-management/reply-info-management.component';
+import { DeleteConfirmationDialogComponent } from './component/shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 
 @NgModule({
   imports: [
-    BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgbModule.forRoot(),
     BrowserModule,
-    AccordionModule,
+    BrowserAnimationsModule,
+    // AccordionModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -46,7 +47,8 @@ import { ReplyInfoManagementComponent } from './component/reply/reply-info-manag
     UserListComponent,
     RegisterComponent,
     ReplyAddComponent,
-    ReplyInfoManagementComponent
+    ReplyInfoManagementComponent,
+    DeleteConfirmationDialogComponent
   ],
   schemas: [],
   providers: [
@@ -63,7 +65,8 @@ import { ReplyInfoManagementComponent } from './component/reply/reply-info-manag
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ DeleteConfirmationDialogComponent ]
 })
 
 export class AppModule {
