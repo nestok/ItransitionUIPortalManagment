@@ -19,6 +19,10 @@ export class ReplyService {
     return this.http.get<Mood[]>(`${environment.resourceServerUrl}reply/getMoods`);
   }
 
+  getTeamStatus() {
+    return this.http.get<Reply[]>(`${environment.resourceServerUrl}reply/getTeamStatuses`);
+  }
+
   getLocations() {
     return this.http.get<Location[]>(`${environment.resourceServerUrl}reply/getLocations`);
   }

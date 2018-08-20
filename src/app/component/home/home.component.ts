@@ -9,6 +9,9 @@ import {Reply} from '../../model/reply';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from '@stomp/stompjs';
 import {ConfirmationDialogService} from '../shared/delete-confirmation-dialog/confirmation-dialog.service';
+import * as moment from 'moment';
+import * as $ from 'jquery';
+
 
 @Component({
   templateUrl: 'home.component.html',
@@ -17,7 +20,7 @@ import {ConfirmationDialogService} from '../shared/delete-confirmation-dialog/co
 export class HomeComponent implements OnInit, OnDestroy {
 
   private serverUrl = 'http://localhost:8081/socket';
-  private stompClient;
+  private stompClient = null;
   getContributorsSubscription: Subscription;
   getReplySubscription: Subscription;
   deleteReplySubscription: Subscription;
@@ -36,9 +39,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loadAllContributors();
-    this.loadAllReplies();
-    this.initializeWebSocketConnection();
+    if (this.isAuthorized()) {
+      this.loadAllContributors();
+      this.loadAllReplies();
+      this.initializeWebSocketConnection();
+    }
   }
 
   initializeWebSocketConnection() {
@@ -68,14 +73,30 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getReplySubscription = this.replyService.getAllReplies()
       .subscribe((replyList: Reply[]) => {
         this.replies = replyList;
+        this.convertDateZeroIndex();
       },
       () => {
         this.infoService.alertInformation(this.infoCodesService.ERROR, 'Error loading reply-list');
       });
   }
 
+  convertDateZeroIndex() {
+    for (let reply of this.replies) {
+      reply.publish_date[1] -= 1;
+      reply.publish_date[6] = 0;
+    }
+  }
+
+  reformatDate(publish_date: Date) {
+    return moment(publish_date).format('LLL');
+  }
+
   isAdmin(): boolean {
     return this.authenticationService.isAdmin();
+  }
+
+  isAuthorized(): boolean {
+    return this.authenticationService.isAuthorized();
   }
 
   openDeleteConfirmationDialog() {
@@ -92,6 +113,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, (errorResponse) => {
         this.infoService.alertInformation(this.infoCodesService.ERROR, errorResponse.error);
       });
+  }
+
+  showContent(replyId: number) {
+    if ($('#' + replyId + '.truncate').hasClass('truncated')) {
+      $('#' + replyId + '.truncate').removeClass('truncated');
+    } else {
+      $('#' + replyId + '.truncate').addClass('truncated');
+    }
   }
 
   ngOnDestroy() {

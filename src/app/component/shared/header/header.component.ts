@@ -16,8 +16,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   }
 
-  isLogin(): boolean {
-    return this.authenticationService.isLogin();
+  isAuthorized(): boolean {
+    return this.authenticationService.isAuthorized();
   }
 
   ngOnDestroy(): void {

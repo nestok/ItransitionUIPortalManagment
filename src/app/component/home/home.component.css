@@ -28,3 +28,15 @@
 .pb-50px {
   padding-bottom: 50px;
 }
+
+.truncate {
+  width: 350px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate.truncated {
+  white-space: initial;
+  width: 100%;
+}

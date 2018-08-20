@@ -24,6 +24,8 @@ import {ReplyService} from './service/reply.service';
 import { ReplyAddComponent } from './component/reply/reply-add/reply-add.component';
 import { ReplyInfoManagementComponent } from './component/reply/reply-info-management/reply-info-management.component';
 import { DeleteConfirmationDialogComponent } from './component/shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import {AuthorizedGuard} from './util/guards/authorized.guard';
+import { TeamStatusComponent } from './component/reply/team-status/team-status.component';
 
 
 @NgModule({
@@ -48,11 +50,13 @@ import { DeleteConfirmationDialogComponent } from './component/shared/delete-con
     RegisterComponent,
     ReplyAddComponent,
     ReplyInfoManagementComponent,
-    DeleteConfirmationDialogComponent
+    DeleteConfirmationDialogComponent,
+    TeamStatusComponent
   ],
   schemas: [],
   providers: [
     AdminGuard,
+    AuthorizedGuard,
     AuthenticationService,
     RegularService,
     InfocodesService,

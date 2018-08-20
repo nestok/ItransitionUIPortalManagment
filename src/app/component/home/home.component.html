@@ -1,4 +1,8 @@
-﻿<section class="py-4 text-center text-lg-left">
+﻿<section class="py-4 text-center text-lg-left" *ngIf="!isAuthorized()">
+  <h2 class="text-center">To become a chosen one you must be logged in.</h2>
+</section>
+
+<section class="py-4 text-center text-lg-left" *ngIf="isAuthorized()">
   <div class="row">
     <div class="col-md-4 mt-1">
       <h2>Team Kotlin</h2>
@@ -14,6 +18,7 @@
         </tr>
         </tbody>
       </table>
+      <button mdbBtn type="button" color="indigo" class="waves-light" routerLink="/team-status" mdbWavesEffect>Team Status</button>
     </div>
 
     <div class="col-md-8">
@@ -28,17 +33,17 @@
       <div class="m-y-rl-15">
           <div class="card card-cascade narrower">
             <div *ngFor="let reply of replies" class="tab-slider--body">
-              <a class="list-group-item list-group-item-action flex-column align-items-start" [ngClass]="isAdmin() ? 'pb-50px' : ''">
+              <a (click)="showContent(reply.id)" class="list-group-item list-group-item-action flex-column align-items-start" [ngClass]="isAdmin() ? 'pb-50px' : ''">
                 <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">Vasya Pypkin</h5>
+                  <h5 class="mb-1">{{reply.user.firstname + " " + reply.user.lastname}}</h5>
                   <div>
                     <h5 class="float-left mr-1">Status: {{reply.mood.text}}</h5>
                     <i class="material-icons">{{reply.mood.icon}}</i>
                   </div>
-                  <small>Published: {{reply.publish_date}}</small>
+                  <small>Published: {{reformatDate(reply.publish_date)}}</small>
                 </div>
                 <p class="mb-1">Location: {{reply.location.name}}</p>
-                <div>
+                <div id="{{reply.id}}" class="truncate">
                   <small>{{reply.comment}}</small>
                 </div>
                 <div *ngIf="isAdmin()" class="right-pos">

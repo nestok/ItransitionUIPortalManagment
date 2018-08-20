@@ -38,16 +38,16 @@ export class AuthenticationService {
     return this.http.get(`${environment.userServerUrl}auth/activate/` + code);
   }
 
-  isLogin(): boolean {
+  isAuthorized(): boolean {
     return JSON.parse(localStorage.getItem('currentUser')) !== null;
   }
 
   isAdmin(): boolean {
-    return this.isLogin() ? JSON.parse(localStorage.getItem('currentUser')).userRole === 'ROLE_ADMIN' : false;
+    return this.isAuthorized() ? JSON.parse(localStorage.getItem('currentUser')).userRole === 'ROLE_ADMIN' : false;
   }
 
   getCurrentUsername(): string {
-    if (this.isLogin()) {
+    if (this.isAuthorized()) {
       return JSON.parse(localStorage.getItem('currentUser')).username;
     }
   }
