@@ -4,7 +4,7 @@
       <div class="form-group">
         <label for="contributor">Contributor:</label>
         <select class="form-control" required id="contributor" formControlName="contributor">
-          <option *ngFor="let contributor of contributors" [ngValue]="contributor">{{contributor.lastName + " " + contributor.firstName}}</option>
+          <option *ngFor="let contributor of contributors" [ngValue]="contributor">{{contributor.lastname + " " + contributor.firstname}}</option>
         </select>
       </div>
       <div class="form-group">

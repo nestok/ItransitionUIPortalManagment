@@ -5,6 +5,7 @@ import {ReplyService} from '../../../service/reply.service';
 import {InfocodesService} from '../../../service/infocodes.service';
 import {InfoService} from '../../../service/info.service';
 import * as moment from 'moment';
+import {ContributorReplyDto} from '../../../dto/ContributorReplyDto';
 
 @Component({
   selector: 'app-team-status',
@@ -13,7 +14,7 @@ import * as moment from 'moment';
 })
 export class TeamStatusComponent implements OnInit, OnDestroy {
 
-  replies: Reply[];
+  contributorReplies: ContributorReplyDto[];
   getTeamStatusSubscription: Subscription;
 
   constructor(
@@ -28,8 +29,8 @@ export class TeamStatusComponent implements OnInit, OnDestroy {
 
   loadLatestRepliesForTeam() {
     this.getTeamStatusSubscription = this.replyService.getTeamStatus()
-      .subscribe((replyList: Reply[]) => {
-          this.replies = replyList;
+      .subscribe((replyList: ContributorReplyDto[]) => {
+          this.contributorReplies = replyList;
           this.convertDateZeroIndex();
         },
         () => {
@@ -38,9 +39,9 @@ export class TeamStatusComponent implements OnInit, OnDestroy {
   }
 
   convertDateZeroIndex() {
-    for (let reply of this.replies) {
-      reply.publish_date[1] -= 1;
-      reply.publish_date[6] = 0;
+    for (let contributorReply of this.contributorReplies) {
+      contributorReply.reply.publish_date[1] -= 1;
+      contributorReply.reply.publish_date[6] = 0;
     }
   }
 

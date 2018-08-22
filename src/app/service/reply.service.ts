@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 import {Reply} from '../model/reply';
 import {Mood, Location} from '../model';
 import {ReplyAddDto} from '../dto/ReplyAddDto';
+import {ContributorReplyDto} from '../dto/ContributorReplyDto';
 
 @Injectable()
 export class ReplyService {
@@ -12,7 +13,7 @@ export class ReplyService {
   }
 
   getAllReplies() {
-    return this.http.get<Reply[]>(`${environment.resourceServerUrl}reply/getAll`);
+    return this.http.get<ContributorReplyDto[]>(`${environment.resourceServerUrl}reply/getAll`);
   }
 
   getMoods() {
@@ -20,7 +21,7 @@ export class ReplyService {
   }
 
   getTeamStatus() {
-    return this.http.get<Reply[]>(`${environment.resourceServerUrl}reply/getTeamStatuses`);
+    return this.http.get<ContributorReplyDto[]>(`${environment.resourceServerUrl}reply/getTeamStatuses`);
   }
 
   getLocations() {

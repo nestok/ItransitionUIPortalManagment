@@ -4,7 +4,7 @@ import {environment} from '../../environments/environment';
 import {User} from '../model';
 import {UserListDto} from '../dto/UserListDto';
 import {UserAddDto} from '../dto/UserAddDto';
-import {ContributorsListDto} from '../dto/ContributorsListDto';
+import {ContributorDto} from '../dto/ContributorDto';
 
 @Injectable()
 export class UserService {
@@ -17,7 +17,7 @@ export class UserService {
   }
 
   getAllContributors() {
-    return this.http.get<ContributorsListDto[]>(`${environment.userServerUrl}user/loadAllContributors`);
+    return this.http.get<ContributorDto[]>(`${environment.userServerUrl}user/loadAllContributors`);
   }
 
   register(user: UserAddDto) {

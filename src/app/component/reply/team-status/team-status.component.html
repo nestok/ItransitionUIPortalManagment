@@ -1,18 +1,18 @@
 <h2 class="text-center mt-4">Team satus</h2>
 <div class="card-columns mt-4">
-  <div class="card" *ngFor="let reply of replies">
+  <div class="card" *ngFor="let contributorReply of contributorReplies">
     <div class="card-body">
-      <h5 class="card-title">{{reply.user.firstname + " " + reply.user.lastname}}</h5>
+      <h5 class="card-title">{{contributorReply.contributor.firstname + " " + contributorReply.contributor.lastname}}</h5>
       <div class="row">
         <div>
-          <h6 class="card-title">Mood: {{reply.mood.text}}</h6>
+          <h6 class="card-title">Mood: {{contributorReply.reply.mood.text}}</h6>
         </div>
         <div class="ml-1">
-          <i class="material-icons">{{reply.mood.icon}}</i>
+          <i class="material-icons">{{contributorReply.reply.mood.icon}}</i>
         </div>
       </div>
-      <p class="card-text">{{reply.comment}}</p>
-      <p class="card-text"><small class="text-muted">{{reformatDate(reply.publish_date)}}</small></p>
+      <p class="card-text">{{contributorReply.reply.comment}}</p>
+      <p class="card-text"><small class="text-muted">{{reformatDate(contributorReply.reply.publish_date)}}</small></p>
     </div>
   </div>
   <!--<div class="card">-->

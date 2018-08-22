@@ -1,7 +1,7 @@
 ﻿import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {AuthenticationService, UserService} from '../../service';
-import {ContributorsListDto} from '../../dto/ContributorsListDto';
+import {ContributorDto} from '../../dto/ContributorDto';
 import {InfocodesService} from '../../service/infocodes.service';
 import {InfoService} from '../../service/info.service';
 import {ReplyService} from '../../service/reply.service';
@@ -11,6 +11,7 @@ import * as Stomp from '@stomp/stompjs';
 import {ConfirmationDialogService} from '../shared/delete-confirmation-dialog/confirmation-dialog.service';
 import * as moment from 'moment';
 import * as $ from 'jquery';
+import {ContributorReplyDto} from '../../dto/ContributorReplyDto';
 
 
 @Component({
@@ -24,8 +25,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   getContributorsSubscription: Subscription;
   getReplySubscription: Subscription;
   deleteReplySubscription: Subscription;
-  contributors: ContributorsListDto[] = [];
-  replies: Reply[] = [];
+  contributors: ContributorDto[] = [];
+  contributorReplies: ContributorReplyDto[] = [];
   deleteReplyId: number;
 
   constructor(
@@ -61,7 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loadAllContributors() {
     this.getContributorsSubscription = this.userService.getAllContributors()
-      .subscribe((contributorsList: ContributorsListDto[]) => {
+      .subscribe((contributorsList: ContributorDto[]) => {
           this.contributors = contributorsList;
         },
         () => {
@@ -71,8 +72,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loadAllReplies() {
     this.getReplySubscription = this.replyService.getAllReplies()
-      .subscribe((replyList: Reply[]) => {
-        this.replies = replyList;
+      .subscribe((replyList: ContributorReplyDto[]) => {
+        this.contributorReplies = replyList;
         this.convertDateZeroIndex();
       },
       () => {
@@ -81,9 +82,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   convertDateZeroIndex() {
-    for (let reply of this.replies) {
-      reply.publish_date[1] -= 1;
-      reply.publish_date[6] = 0;
+    for (let contributorReply of this.contributorReplies) {
+      contributorReply.reply.publish_date[1] -= 1;
+      contributorReply.reply.publish_date[6] = 0;
     }
   }
 

@@ -5,7 +5,7 @@ import {ReplyService} from '../../../service/reply.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {InfocodesService} from '../../../service/infocodes.service';
 import {Subscription} from 'rxjs';
-import {ContributorsListDto} from '../../../dto/ContributorsListDto';
+import {ContributorDto} from '../../../dto/ContributorDto';
 import {AuthenticationService, UserService} from '../../../service';
 import {Router} from '@angular/router';
 import {ReplyAddDto} from '../../../dto/ReplyAddDto';
@@ -28,7 +28,7 @@ export class ReplyAddComponent implements OnInit, OnDestroy {
   moods: Mood[];
   locations: Location[];
   replyForm: FormGroup;
-  contributors: ContributorsListDto[];
+  contributors: ContributorDto[];
 
 
   constructor(
@@ -88,7 +88,7 @@ export class ReplyAddComponent implements OnInit, OnDestroy {
 
   loadAllContributors() {
     this.getContributorsSubscription = this.userService.getAllContributors()
-      .subscribe((contributorsList: ContributorsListDto[]) => {
+      .subscribe((contributorsList: ContributorDto[]) => {
           this.contributors = contributorsList;
         },
         () => {
