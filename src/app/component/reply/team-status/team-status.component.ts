@@ -6,6 +6,7 @@ import {InfocodesService} from '../../../service/infocodes.service';
 import {InfoService} from '../../../service/info.service';
 import * as moment from 'moment';
 import {ContributorReplyDto} from '../../../dto/ContributorReplyDto';
+import {ContributorDto} from '../../../dto/ContributorDto';
 
 @Component({
   selector: 'app-team-status',
@@ -14,8 +15,10 @@ import {ContributorReplyDto} from '../../../dto/ContributorReplyDto';
 })
 export class TeamStatusComponent implements OnInit, OnDestroy {
 
-  contributorReplies: ContributorReplyDto[];
+  replies: ContributorReplyDto[];
+  contributorsUnreplied: ContributorDto[];
   getTeamStatusSubscription: Subscription;
+  getContributorsWithoutReplySubscription: Subscription;
 
   constructor(
     private replyService: ReplyService,
@@ -25,12 +28,13 @@ export class TeamStatusComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadLatestRepliesForTeam();
+    this.loadContributorsWithoutReply();
   }
 
   loadLatestRepliesForTeam() {
     this.getTeamStatusSubscription = this.replyService.getTeamStatus()
       .subscribe((replyList: ContributorReplyDto[]) => {
-          this.contributorReplies = replyList;
+          this.replies = replyList;
           this.convertDateZeroIndex();
         },
         () => {
@@ -38,10 +42,20 @@ export class TeamStatusComponent implements OnInit, OnDestroy {
         });
   }
 
+  loadContributorsWithoutReply() {
+    this.getContributorsWithoutReplySubscription = this.replyService.getContributorsWithoutReply()
+      .subscribe((contributors: ContributorDto[]) => {
+          this.contributorsUnreplied = contributors;
+        },
+        () => {
+          this.infoService.alertInformation(this.infoCodesService.ERROR, 'Error loading contributors-list');
+        });
+  }
+
   convertDateZeroIndex() {
-    for (let contributorReply of this.contributorReplies) {
-      contributorReply.reply.publish_date[1] -= 1;
-      contributorReply.reply.publish_date[6] = 0;
+    for (let reply of this.replies) {
+      reply.publish_date[1] -= 1;
+      reply.publish_date[6] = 0;
     }
   }
 
@@ -51,6 +65,7 @@ export class TeamStatusComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.getTeamStatusSubscription && this.getTeamStatusSubscription.unsubscribe();
+    this.getContributorsWithoutReplySubscription && this.getContributorsWithoutReplySubscription.unsubscribe();
   }
 
 }

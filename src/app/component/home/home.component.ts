@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getReplySubscription: Subscription;
   deleteReplySubscription: Subscription;
   contributors: ContributorDto[] = [];
-  contributorReplies: ContributorReplyDto[] = [];
+  replies: ContributorReplyDto[] = [];
   deleteReplyId: number;
 
   constructor(
@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   loadAllReplies() {
     this.getReplySubscription = this.replyService.getAllReplies()
       .subscribe((replyList: ContributorReplyDto[]) => {
-        this.contributorReplies = replyList;
+        this.replies = replyList;
         this.convertDateZeroIndex();
       },
       () => {
@@ -82,9 +82,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   convertDateZeroIndex() {
-    for (let contributorReply of this.contributorReplies) {
-      contributorReply.reply.publish_date[1] -= 1;
-      contributorReply.reply.publish_date[6] = 0;
+    for (let reply of this.replies) {
+      reply.publish_date[1] -= 1;
+      reply.publish_date[6] = 0;
     }
   }
 

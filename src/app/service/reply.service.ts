@@ -5,6 +5,7 @@ import {Reply} from '../model/reply';
 import {Mood, Location} from '../model';
 import {ReplyAddDto} from '../dto/ReplyAddDto';
 import {ContributorReplyDto} from '../dto/ContributorReplyDto';
+import {ContributorDto} from '../dto/ContributorDto';
 
 @Injectable()
 export class ReplyService {
@@ -22,6 +23,10 @@ export class ReplyService {
 
   getTeamStatus() {
     return this.http.get<ContributorReplyDto[]>(`${environment.resourceServerUrl}reply/getTeamStatuses`);
+  }
+
+  getContributorsWithoutReply() {
+    return this.http.get<ContributorDto[]>(`${environment.resourceServerUrl}reply/getContributorsWithoutReply`);
   }
 
   getLocations() {
