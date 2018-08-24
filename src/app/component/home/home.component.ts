@@ -5,13 +5,12 @@ import {ContributorDto} from '../../dto/ContributorDto';
 import {InfocodesService} from '../../service/infocodes.service';
 import {InfoService} from '../../service/info.service';
 import {ReplyService} from '../../service/reply.service';
-import {Reply} from '../../model/reply';
 import * as SockJS from 'sockjs-client';
 import * as Stomp from '@stomp/stompjs';
 import {ConfirmationDialogService} from '../shared/delete-confirmation-dialog/confirmation-dialog.service';
 import * as moment from 'moment';
 import * as $ from 'jquery';
-import {ContributorReplyDto} from '../../dto/ContributorReplyDto';
+import {ReplyDto} from '../../dto/ReplyDto';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getReplySubscription: Subscription;
   deleteReplySubscription: Subscription;
   contributors: ContributorDto[] = [];
-  replies: ContributorReplyDto[] = [];
+  replies: ReplyDto[] = [];
   deleteReplyId: number;
 
   constructor(
@@ -60,6 +59,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  sendMessage() {
+    this.stompClient.send('/app/send' , {});
+  }
+
   loadAllContributors() {
     this.getContributorsSubscription = this.userService.getAllContributors()
       .subscribe((contributorsList: ContributorDto[]) => {
@@ -72,7 +75,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   loadAllReplies() {
     this.getReplySubscription = this.replyService.getAllReplies()
-      .subscribe((replyList: ContributorReplyDto[]) => {
+      .subscribe((replyList: ReplyDto[]) => {
         this.replies = replyList;
         this.convertDateZeroIndex();
       },
@@ -111,6 +114,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.deleteReplySubscription = this.replyService.deleteReply(replyId)
       .subscribe(() => {
         this.loadAllReplies();
+        this.sendMessage();
       }, (errorResponse) => {
         this.infoService.alertInformation(this.infoCodesService.ERROR, errorResponse.error);
       });

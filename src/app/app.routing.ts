@@ -9,6 +9,7 @@ import {ReplyAddComponent} from './component/reply/reply-add/reply-add.component
 import {ReplyInfoManagementComponent} from './component/reply/reply-info-management/reply-info-management.component';
 import {AuthorizedGuard} from './util/guards/authorized.guard';
 import {TeamStatusComponent} from './component/reply/team-status/team-status.component';
+import {Exception404Component} from './component/exception/exception404/exception404.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,7 +19,7 @@ const appRoutes: Routes = [
   {path: 'users', component: UserListComponent, canActivate: [AdminGuard]},
   {path: 'reply-configure', component: ReplyInfoManagementComponent, canActivate: [AdminGuard]},
   {path: 'team-status', component: TeamStatusComponent, canActivate: [AuthorizedGuard]},
-  {path: '**', redirectTo: 'exception404'}
+  {path: '**', component: Exception404Component}
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

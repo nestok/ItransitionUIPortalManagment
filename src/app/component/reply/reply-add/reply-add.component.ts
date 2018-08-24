@@ -60,7 +60,7 @@ export class ReplyAddComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    this.stompClient.send('/app/send/reply' , {});
+    this.stompClient.send('/app/send' , {});
   }
 
   loadMoodList() {

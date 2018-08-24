@@ -10,7 +10,6 @@ import {AdminGuard} from './util/guards';
 import {JwtInterceptor} from './util/helpers';
 import {AuthenticationService, UserService} from './service';
 import {HeaderComponent} from './component/shared/header/header.component';
-import {AccordionModule} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './component/auth/login/login.component';
 import {HomeComponent} from './component/home/home.component';
@@ -26,6 +25,7 @@ import { ReplyInfoManagementComponent } from './component/reply/reply-info-manag
 import { DeleteConfirmationDialogComponent } from './component/shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import {AuthorizedGuard} from './util/guards/authorized.guard';
 import { TeamStatusComponent } from './component/reply/team-status/team-status.component';
+import { Exception404Component } from './component/exception/exception404/exception404.component';
 
 
 @NgModule({
@@ -34,7 +34,6 @@ import { TeamStatusComponent } from './component/reply/team-status/team-status.c
     NgbModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
-    // AccordionModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -51,7 +50,8 @@ import { TeamStatusComponent } from './component/reply/team-status/team-status.c
     ReplyAddComponent,
     ReplyInfoManagementComponent,
     DeleteConfirmationDialogComponent,
-    TeamStatusComponent
+    TeamStatusComponent,
+    Exception404Component
   ],
   schemas: [],
   providers: [

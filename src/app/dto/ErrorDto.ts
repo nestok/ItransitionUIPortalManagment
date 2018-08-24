@@ -1,3 +1,3 @@
 export class ErrorDto {
-  message : string;
+  message: string;
 }

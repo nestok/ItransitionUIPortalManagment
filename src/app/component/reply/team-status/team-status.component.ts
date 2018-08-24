@@ -5,7 +5,7 @@ import {ReplyService} from '../../../service/reply.service';
 import {InfocodesService} from '../../../service/infocodes.service';
 import {InfoService} from '../../../service/info.service';
 import * as moment from 'moment';
-import {ContributorReplyDto} from '../../../dto/ContributorReplyDto';
+import {ReplyDto} from '../../../dto/ReplyDto';
 import {ContributorDto} from '../../../dto/ContributorDto';
 
 @Component({
@@ -15,7 +15,7 @@ import {ContributorDto} from '../../../dto/ContributorDto';
 })
 export class TeamStatusComponent implements OnInit, OnDestroy {
 
-  replies: ContributorReplyDto[];
+  replies: ReplyDto[];
   contributorsUnreplied: ContributorDto[];
   getTeamStatusSubscription: Subscription;
   getContributorsWithoutReplySubscription: Subscription;
@@ -33,7 +33,7 @@ export class TeamStatusComponent implements OnInit, OnDestroy {
 
   loadLatestRepliesForTeam() {
     this.getTeamStatusSubscription = this.replyService.getTeamStatus()
-      .subscribe((replyList: ContributorReplyDto[]) => {
+      .subscribe((replyList: ReplyDto[]) => {
           this.replies = replyList;
           this.convertDateZeroIndex();
         },

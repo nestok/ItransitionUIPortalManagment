@@ -13,11 +13,11 @@ export class UserService {
   }
 
   getAll() {
-    return this.http.get<UserListDto[]>(`${environment.userServerUrl}user/loadAll`);
+    return this.http.get<UserListDto[]>(`${environment.userServerUrl}user/`);
   }
 
   getAllContributors() {
-    return this.http.get<ContributorDto[]>(`${environment.userServerUrl}user/loadAllContributors`);
+    return this.http.get<ContributorDto[]>(`${environment.userServerUrl}user/contributors`);
   }
 
   register(user: UserAddDto) {
@@ -25,7 +25,7 @@ export class UserService {
   }
 
   delete(id: number) {
-    return this.http.delete(`${environment.userServerUrl}user/delete/` + id);
+    return this.http.delete(`${environment.userServerUrl}user/` + id);
   }
 
   transformRoleToView(role: string): string {
