@@ -14,55 +14,55 @@ export class ReplyService {
   }
 
   getAllReplies() {
-    return this.http.get<ContributorReplyDto[]>(`${environment.resourceServerUrl}reply/getAll`);
+    return this.http.get<ContributorReplyDto[]>(`${environment.resourceServerUrl}reply/`);
   }
 
   getMoods() {
-    return this.http.get<Mood[]>(`${environment.resourceServerUrl}reply/getMoods`);
+    return this.http.get<Mood[]>(`${environment.resourceServerUrl}mood/`);
   }
 
   getTeamStatus() {
-    return this.http.get<ContributorReplyDto[]>(`${environment.resourceServerUrl}reply/getTeamStatuses`);
+    return this.http.get<ContributorReplyDto[]>(`${environment.resourceServerUrl}reply/lastStatuses`);
   }
 
   getContributorsWithoutReply() {
-    return this.http.get<ContributorDto[]>(`${environment.resourceServerUrl}reply/getContributorsWithoutReply`);
+    return this.http.get<ContributorDto[]>(`${environment.resourceServerUrl}contributors/withoutReply`);
   }
 
   getLocations() {
-    return this.http.get<Location[]>(`${environment.resourceServerUrl}reply/getLocations`);
+    return this.http.get<Location[]>(`${environment.resourceServerUrl}location/`);
   }
 
   deleteMood(id: number) {
-    return this.http.delete(`${environment.resourceServerUrl}reply/deleteMood/` + id);
+    return this.http.delete(`${environment.resourceServerUrl}mood/` + id);
   }
 
   addMood(mood: Mood) {
-    return this.http.post(`${environment.resourceServerUrl}reply/addMood`, mood);
+    return this.http.post(`${environment.resourceServerUrl}mood/add`, mood);
   }
 
   editMood(mood: Mood) {
-    return this.http.put(`${environment.resourceServerUrl}reply/editMood`, mood);
+    return this.http.put(`${environment.resourceServerUrl}mood/edit`, mood);
   }
 
   addLocation(location: Location) {
-    return this.http.post(`${environment.resourceServerUrl}reply/addLocation`, location);
+    return this.http.post(`${environment.resourceServerUrl}location/add`, location);
   }
 
   addReply(reply: ReplyAddDto) {
-    return this.http.post(`${environment.resourceServerUrl}reply/addReply`, reply);
+    return this.http.post(`${environment.resourceServerUrl}reply/add`, reply);
   }
 
   editLocation(location: Location) {
-    return this.http.put(`${environment.resourceServerUrl}reply/editLocation`, location);
+    return this.http.put(`${environment.resourceServerUrl}location/edit`, location);
   }
 
   deleteLocation(id: number) {
-    return this.http.delete(`${environment.resourceServerUrl}reply/deleteLocation/` + id);
+    return this.http.delete(`${environment.resourceServerUrl}location/` + id);
   }
 
   deleteReply(id: number) {
-    return this.http.delete(`${environment.resourceServerUrl}reply/deleteReply/` + id);
+    return this.http.delete(`${environment.resourceServerUrl}reply/` + id);
   }
 
 }
