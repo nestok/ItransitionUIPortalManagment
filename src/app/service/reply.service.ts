@@ -38,23 +38,23 @@ export class ReplyService {
   }
 
   addMood(mood: Mood) {
-    return this.http.post(`${environment.resourceServerUrl}mood/add`, mood);
+    return this.http.post(`${environment.resourceServerUrl}mood/`, mood);
   }
 
   editMood(mood: Mood) {
-    return this.http.put(`${environment.resourceServerUrl}mood/edit`, mood);
+    return this.http.put(`${environment.resourceServerUrl}mood/`, mood);
   }
 
   addLocation(location: Location) {
-    return this.http.post(`${environment.resourceServerUrl}location/add`, location);
+    return this.http.post(`${environment.resourceServerUrl}location/`, location);
   }
 
   addReply(reply: ReplyAddDto) {
-    return this.http.post(`${environment.resourceServerUrl}reply/add`, reply);
+    return this.http.post(`${environment.resourceServerUrl}reply/`, reply);
   }
 
   editLocation(location: Location) {
-    return this.http.put(`${environment.resourceServerUrl}location/edit`, location);
+    return this.http.put(`${environment.resourceServerUrl}location/`, location);
   }
 
   deleteLocation(id: number) {
